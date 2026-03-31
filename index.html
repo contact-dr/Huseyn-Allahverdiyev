@@ -1408,9 +1408,6 @@
               <span id="proceduresKicker">Dental Procedures</span>
             </div>
             <h2 class="procedures-title" id="proceduresTitle">Available Dental Procedures</h2>
-            <p class="procedures-desc" id="proceduresDesc">
-              A clear overview of the most frequently requested dental procedures, presented in patient-friendly medical terminology for each selected language.
-            </p>
           </div>
         </div>
         <div class="procedures-grid" id="proceduresList"></div>
@@ -1434,7 +1431,7 @@
         doctorName: "Huseyn Allahverdiyev",
         introBadge: "Baku Premium Dental Contact",
         introTitleLines: ["Luxury", "Dental", "Contact"],
-        introSub: "Premium dental presentation with elegant motion, refined visuals, and fast contact access.",
+        introSub: "Professional Dentistry with a Premium Touch.",
         topPill: "Baku Dental Aesthetics • Premium Contact",
         eyebrow: "Aesthetic & Restorative Dentistry",
         heroSoft: "Confident smiles,",
@@ -1453,7 +1450,6 @@
         bottomNote: "Smile design • oral health • preventive dentistry • aesthetic consultation",
         proceduresKicker: "Dental Procedures",
         proceduresTitle: "Available Dental Procedures",
-        proceduresDesc: "A clear overview of the most frequently requested dental procedures, presented in patient-friendly medical terminology for each selected language.",
         procedures: [
           "Simple Filling",
           "Aesthetic Composite Filling",
@@ -1498,7 +1494,6 @@
         bottomNote: "Təbəssüm dizaynı • ağız sağlamlığı • profilaktik stomatologiya • estetik konsultasiya",
         proceduresKicker: "Stomatoloji prosedurlar",
         proceduresTitle: "Mövcud Stomatoloji prosedurlar",
-        proceduresDesc: "Ən çox tələb olunan stomatoloji prosedurlar seçilmiş dilə uyğun, pasiyent üçün aydın və tibbi baxımdan düzgün terminlərlə təqdim olunur.",
         procedures: [
           "Sadə plomb (Diş dolğusu)",
           "Estetik plomb (Kompozit dolğu)",
@@ -1543,7 +1538,6 @@
         bottomNote: "дизайн улыбки • здоровье полости рта • профилактическая стоматология • эстетическая консультация",
         proceduresKicker: "Стоматологические процедуры",
         proceduresTitle: "Доступные стоматологические процедуры",
-        proceduresDesc: "Наиболее востребованные стоматологические процедуры представлены на понятном для пациента и профессионально корректном медицинском языке для каждого выбранного языка.",
         procedures: [
           "Простая пломба",
           "Эстетическая композитная реставрация",
@@ -1588,7 +1582,6 @@
         bottomNote: "تصميم الابتسامة • صحة الفم • طب الأسنان الوقائي • استشارة تجميلية",
         proceduresKicker: "إجراءات الأسنان",
         proceduresTitle: "إجراءات علاج الأسنان المتاحة",
-        proceduresDesc: "عرض واضح لأكثر إجراءات علاج الأسنان طلباً، بصياغة طبية مفهومة للمريض ومناسبة لكل لغة يتم اختيارها.",
         procedures: [
           "حشوة عادية",
           "حشوة تجميلية كومبوزيت",
@@ -1632,7 +1625,6 @@
     const bottomNote = document.getElementById("bottomNote");
     const proceduresKicker = document.getElementById("proceduresKicker");
     const proceduresTitle = document.getElementById("proceduresTitle");
-    const proceduresDesc = document.getElementById("proceduresDesc");
     const proceduresList = document.getElementById("proceduresList");
     const langButtons = document.querySelectorAll(".lang-btn");
 
@@ -1718,7 +1710,6 @@
       bottomNote.textContent = t.bottomNote;
       proceduresKicker.textContent = t.proceduresKicker;
       proceduresTitle.textContent = t.proceduresTitle;
-      proceduresDesc.textContent = t.proceduresDesc;
       renderProcedures(t.procedures);
 
       langButtons.forEach(btn => {
