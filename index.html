@@ -873,6 +873,121 @@
     }
 
     /* --------------------------------
+       PROCEDURES SECTION
+    -------------------------------- */
+    .procedures-panel{
+      display:grid;
+      grid-column:1 / -1;
+      gap:18px;
+      padding:24px;
+      border-radius:28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow-lg);
+      min-width:0;
+    }
+
+    .procedures-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .procedures-copy{ min-width:0; }
+
+    .procedures-kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:11px 15px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      color:rgba(255,241,205,.92);
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      margin-bottom:14px;
+      box-shadow:var(--shadow-md);
+      max-width:100%;
+    }
+
+    .procedures-kicker i{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:radial-gradient(circle at 35% 35%, #fffef8, var(--champagne-2));
+      box-shadow:0 0 10px rgba(245,223,159,.75);
+      flex:0 0 auto;
+    }
+
+    .procedures-title{
+      font-size:clamp(26px, 3.5vw, 38px);
+      line-height:1.08;
+      letter-spacing:-.04em;
+      font-weight:900;
+      margin-bottom:10px;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+    }
+
+    .procedures-desc{
+      max-width:72ch;
+      color:var(--text-soft);
+      font-size:14.5px;
+      line-height:1.8;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+      hyphens:auto;
+    }
+
+    .procedures-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:12px;
+    }
+
+    .procedure-item{
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      min-width:0;
+      padding:14px 15px;
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.07);
+      color:var(--text-soft);
+      box-shadow:var(--shadow-md);
+    }
+
+    .procedure-num{
+      width:32px;
+      height:32px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      font-size:12px;
+      font-weight:800;
+      color:#fff5d7;
+      background:linear-gradient(180deg, rgba(245,223,159,.20), rgba(185,138,59,.12));
+      border:1px solid rgba(245,223,159,.18);
+    }
+
+    .procedure-text{
+      min-width:0;
+      font-size:14px;
+      line-height:1.7;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+      hyphens:auto;
+    }
+
+
+    /* --------------------------------
        RTL
     -------------------------------- */
     body.rtl .left{
@@ -882,7 +997,10 @@
     body.rtl .hero-desc,
     body.rtl .meta-row,
     body.rtl .tag,
-    body.rtl .bottom-note{
+    body.rtl .bottom-note,
+    body.rtl .procedures-desc,
+    body.rtl .procedure-item,
+    body.rtl .procedure-text{
       text-align:right;
     }
 
@@ -897,6 +1015,14 @@
 
     body.rtl .service-tags{
       justify-content:flex-end;
+    }
+
+    body.rtl .procedures-head{
+      flex-direction:row-reverse;
+    }
+
+    body.rtl .procedures-kicker{
+      margin-left:auto;
     }
 
     body.rtl .topbar{
@@ -1026,6 +1152,36 @@
         padding:11px 12px;
       }
 
+      .procedures-panel{
+        padding:18px 14px;
+        border-radius:24px;
+        gap:14px;
+      }
+
+      .procedures-title{
+        font-size:24px;
+      }
+
+      .procedures-desc{
+        font-size:13.5px;
+        line-height:1.72;
+      }
+
+      .procedures-grid{
+        grid-template-columns:1fr;
+        gap:10px;
+      }
+
+      .procedure-item{
+        padding:12px 13px;
+        border-radius:16px;
+      }
+
+      .procedure-text{
+        font-size:13px;
+        line-height:1.62;
+      }
+
       .btn{
         min-height:54px;
         padding:13px 14px;
@@ -1075,7 +1231,9 @@
       }
 
       .hero-desc,
-      .meta-row{
+      .meta-row,
+      .procedures-desc,
+      .procedure-text{
         font-size:13px;
       }
 
@@ -1241,6 +1399,23 @@
           </article>
         </div>
       </div>
+
+      <section class="procedures-panel" aria-labelledby="proceduresTitle">
+        <div class="procedures-head">
+          <div class="procedures-copy">
+            <div class="procedures-kicker">
+              <i></i>
+              <span id="proceduresKicker">Dental Procedures</span>
+            </div>
+            <h2 class="procedures-title" id="proceduresTitle">Available Dental Procedures</h2>
+            <p class="procedures-desc" id="proceduresDesc">
+              A clear overview of the most frequently requested dental procedures, presented in patient-friendly medical terminology for each selected language.
+            </p>
+          </div>
+        </div>
+        <div class="procedures-grid" id="proceduresList"></div>
+      </section>
+
     </section>
   </main>
 
@@ -1275,7 +1450,29 @@
         waMeta: "Message Now",
         igLabel: "Instagram Profile",
         igMeta: "View Updates",
-        bottomNote: "Smile design • oral health • preventive dentistry • aesthetic consultation"
+        bottomNote: "Smile design • oral health • preventive dentistry • aesthetic consultation",
+        proceduresKicker: "Dental Procedures",
+        proceduresTitle: "Available Dental Procedures",
+        proceduresDesc: "A clear overview of the most frequently requested dental procedures, presented in patient-friendly medical terminology for each selected language.",
+        procedures: [
+          "Simple Filling",
+          "Aesthetic Composite Filling",
+          "Root Canal Treatment (Per Canal)",
+          "Re-Root Canal Treatment (Re-Endodontic Treatment)",
+          "Professional Cleaning and Whitening (Scaling + Whitening)",
+          "Simple Tooth Extraction",
+          "Complex Extraction (Root Extraction / Surgical Extraction)",
+          "Wisdom Tooth Extraction",
+          "Impacted Wisdom Tooth Surgical Extraction",
+          "Dental Implant",
+          "Metal-Ceramic Crown",
+          "Zirconia Crown",
+          "Implant-Supported Porcelain Crown",
+          "Implant-Supported Zirconia Crown",
+          "Implant-Supported Overdenture with Ball Attachments (Snap-On Denture)",
+          "Apicoectomy (Surgical Removal of Root Apex)",
+          "Hemisection (Removal of One Root/Section of the Tooth)"
+        ]
       },
       az: {
         dir: "ltr",
@@ -1298,7 +1495,29 @@
         waMeta: "Yazın",
         igLabel: "Instagram Profil",
         igMeta: "Yeniliklər",
-        bottomNote: "Təbəssüm dizaynı • ağız sağlamlığı • profilaktik stomatologiya • estetik konsultasiya"
+        bottomNote: "Təbəssüm dizaynı • ağız sağlamlığı • profilaktik stomatologiya • estetik konsultasiya",
+        proceduresKicker: "Diş prosedurları",
+        proceduresTitle: "Mövcud diş prosedurları",
+        proceduresDesc: "Ən çox tələb olunan stomatoloji prosedurlar seçilmiş dilə uyğun, pasiyent üçün aydın və tibbi baxımdan düzgün terminlərlə təqdim olunur.",
+        procedures: [
+          "Sadə plomb (Diş dolğusu)",
+          "Estetik plomb (Kompozit dolğu)",
+          "Kanal müalicəsi (Endodontik müalicə, 1 kanal)",
+          "Re-endo — təkrar kanal müalicəsi (Yenidən endodontik müalicə)",
+          "Diş daşlarının təmizlənməsi və ağartma (Scaling + whitening)",
+          "Sadə diş çəkimi (Adi ekstraksiya)",
+          "Kök çəkimi (Çətin ekstraksiya)",
+          "Ağıl dişi çəkimi (Wisdom tooth extraction)",
+          "Retensiyalı ağıl dişi çəkimi (Cərrahi çıxarılma)",
+          "İmplant (Diş implantı)",
+          "Metal-keramika tac (Crown)",
+          "Zirkonium tac (Zirconia crown)",
+          "İmplant üzəri keramika tac",
+          "İmplant üzəri zirkonium tac",
+          "İmplant üzəri ball ataçmentli protez (Snap-on protez)",
+          "Rezeksiya (Kök ucunun cərrahi çıxarılması)",
+          "Hemiseksiya (Dişin bir hissəsinin çıxarılması)"
+        ]
       },
       ru: {
         dir: "ltr",
@@ -1311,17 +1530,39 @@
         heroSoft: "Уверенная улыбка,",
         heroGold: "современная стоматология.",
         heroDesc: "Индивидуальный стоматологический подход с акцентом на эстетику улыбки, здоровье полости рта, комфорт пациента и современные стандарты лечения. Прямая связь для консультации, записи и общения по лечению.",
-        tag1: "Дизайн Улыбки",
+        tag1: "Дизайн улыбки",
         tag2: "Профилактика",
-        tag3: "Эстетика Зубов",
+        tag3: "Эстетика зубов",
         doctorRole: "Стоматолог • Эстетическая и профилактическая стоматология",
         meta1: "Акцент на дизайн улыбки, профилактику и ориентированное на пациента лечение.",
         meta2: "Доступен для консультаций, записи на приём и коммуникации по лечению.",
-        waLabel: "Консультация WhatsApp",
+        waLabel: "Консультация в WhatsApp",
         waMeta: "Написать",
         igLabel: "Профиль Instagram",
         igMeta: "Обновления",
-        bottomNote: "дизайн улыбки • здоровье полости рта • профилактическая стоматология • эстетическая консультация"
+        bottomNote: "дизайн улыбки • здоровье полости рта • профилактическая стоматология • эстетическая консультация",
+        proceduresKicker: "Стоматологические процедуры",
+        proceduresTitle: "Доступные стоматологические процедуры",
+        proceduresDesc: "Наиболее востребованные стоматологические процедуры представлены на понятном для пациента и профессионально корректном медицинском языке для каждого выбранного языка.",
+        procedures: [
+          "Простая пломба",
+          "Эстетическая композитная реставрация",
+          "Лечение корневого канала (1 канал)",
+          "Повторное эндодонтическое лечение (перелечивание канала)",
+          "Профессиональная чистка и отбеливание (скейлинг + отбеливание)",
+          "Простое удаление зуба",
+          "Сложное удаление зуба (удаление корня / хирургическое удаление)",
+          "Удаление зуба мудрости",
+          "Хирургическое удаление ретинированного зуба мудрости",
+          "Дентальный имплантат",
+          "Металлокерамическая коронка",
+          "Циркониевая коронка",
+          "Керамическая коронка на имплантате",
+          "Циркониевая коронка на имплантате",
+          "Покрывной протез на имплантатах с шаровидными аттачментами (snap-on)",
+          "Резекция верхушки корня",
+          "Гемисекция (удаление одного корня / части зуба)"
+        ]
       },
       ar: {
         dir: "rtl",
@@ -1337,14 +1578,36 @@
         tag1: "تصميم الابتسامة",
         tag2: "العناية الوقائية",
         tag3: "تجميل الأسنان",
-        doctorRole: "طبيب أسنان • عناية تجميلية ووقائية",
+        doctorRole: "طبيب أسنان • رعاية تجميلية ووقائية",
         meta1: "تركيز على تصميم الابتسامة والوقاية وعلاج يضع المريض أولاً.",
         meta2: "متاح للاستشارات وطلبات المواعيد والتواصل المتعلق بالعلاج.",
         waLabel: "استشارة واتساب",
         waMeta: "راسل الآن",
         igLabel: "حساب إنستغرام",
         igMeta: "آخر التحديثات",
-        bottomNote: "تصميم الابتسامة • صحة الفم • طب الأسنان الوقائي • استشارة تجميلية"
+        bottomNote: "تصميم الابتسامة • صحة الفم • طب الأسنان الوقائي • استشارة تجميلية",
+        proceduresKicker: "إجراءات الأسنان",
+        proceduresTitle: "إجراءات علاج الأسنان المتاحة",
+        proceduresDesc: "عرض واضح لأكثر إجراءات علاج الأسنان طلباً، بصياغة طبية مفهومة للمريض ومناسبة لكل لغة يتم اختيارها.",
+        procedures: [
+          "حشوة عادية",
+          "حشوة تجميلية كومبوزيت",
+          "علاج عصب الأسنان (لكل قناة)",
+          "إعادة علاج العصب (إعادة المعالجة اللُّبية)",
+          "تنظيف احترافي وتبييض (إزالة الجير + تبييض)",
+          "خلع سن بسيط",
+          "خلع معقد (خلع جذر / خلع جراحي)",
+          "خلع ضرس العقل",
+          "خلع جراحي لضرس العقل المنطمر",
+          "زرعة سنية",
+          "تاج معدن-خزف",
+          "تاج زركون",
+          "تاج خزفي فوق الزرعة",
+          "تاج زركون فوق الزرعة",
+          "طقم متحرك فوق الزرعات مع مثبتات كروية (Snap-on)",
+          "استئصال ذروة الجذر",
+          "هيميسكشن (إزالة أحد الجذور / جزء من السن)"
+        ]
       }
     };
 
@@ -1367,6 +1630,10 @@
     const igLabel = document.getElementById("igLabel");
     const igMeta = document.getElementById("igMeta");
     const bottomNote = document.getElementById("bottomNote");
+    const proceduresKicker = document.getElementById("proceduresKicker");
+    const proceduresTitle = document.getElementById("proceduresTitle");
+    const proceduresDesc = document.getElementById("proceduresDesc");
+    const proceduresList = document.getElementById("proceduresList");
     const langButtons = document.querySelectorAll(".lang-btn");
 
     const particlesContainer = document.getElementById("particles");
@@ -1414,6 +1681,15 @@
       `;
     }
 
+    function renderProcedures(items = []){
+      proceduresList.innerHTML = items.map((item, index) => `
+        <div class="procedure-item">
+          <span class="procedure-num">${index + 1}</span>
+          <div class="procedure-text">${item}</div>
+        </div>
+      `).join("");
+    }
+
     function applyLanguage(lang){
       const t = translations[lang] || translations.en;
 
@@ -1440,6 +1716,10 @@
       igLabel.textContent = t.igLabel;
       igMeta.textContent = t.igMeta;
       bottomNote.textContent = t.bottomNote;
+      proceduresKicker.textContent = t.proceduresKicker;
+      proceduresTitle.textContent = t.proceduresTitle;
+      proceduresDesc.textContent = t.proceduresDesc;
+      renderProcedures(t.procedures);
 
       langButtons.forEach(btn => {
         btn.classList.toggle("active", btn.dataset.lang === lang);
